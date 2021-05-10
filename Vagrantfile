@@ -25,6 +25,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider "virtualbox" do |v|
      v.customize ["modifyvm", :id, "--memory", vm_ram, "--cpus", vm_cpu]
      v.customize ["modifyvm", :id, "--ioapic", "on", "--largepages", "off", "--vtxvpid", "off"]
+     # allow symlinks to be created when running on Windows
+     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate//v-root", "1"]    
      v.name = "mapserver-vagrant"
    end
 
