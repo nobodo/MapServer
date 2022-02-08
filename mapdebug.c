@@ -141,6 +141,10 @@ int msSetErrorFile(const char *pszErrorFile, const char *pszRelToPath)
     /* Try to make the path relative */
     if(msBuildPath(extended_path, pszRelToPath, pszErrorFile) == NULL)
       return MS_FAILURE;
+    pid_t pid = getpid();
+    char mypid[24];
+    sprintf(mypid, ".%d", pid);
+    strcat(extended_path, mypid);
     pszErrorFile = extended_path;
   }
 
